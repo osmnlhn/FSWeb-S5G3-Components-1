@@ -2,7 +2,7 @@ import "./haberler.less";
 // Haberleri üretmek için aşağıdaki data kullanılacak. Önce inceleyin sonra 94. satıra geçin.
 // OPSİYONEL: Kendinizi maceracı hissediyorsanız, bu verileri farklı bir modülden dışa aktarmaya çalışın ve buraya aktarın.
 // ES6 Modülleri ile ilgili bilgi için bakabilirsiniz: https://exploringjs.com/es6/ch_modules.html#sec_basics-of-es6-modules
-const data = [
+const data = [ // Object Array
   {
     baslik: 'Workintech Öğrencileri: "Bizler en iyi öğrencileriz!"',
     tarih: "11 Kasım 2022",
@@ -115,3 +115,78 @@ const data = [
   Adım 5: Veri dizisine yeni haber nesnesi eklemeyi deneyin. Diğer verilerle aynı yapıda olmasına dikkat edin.
   Eklediğiniz yeni haberi görmek için sayfayı yenileyin.
 */
+
+//const haberYapici=(haber)=>{}
+/*
+function haberYapici(haber) {
+  return `<div class="article">
+       <h2>${haber.baslik}</h2>
+       <p class="tarih">${haber.tarih}</p>
+       <p>${haber.ikinciParagraf}</p>
+       <p>${haber.ikinciParagraf}</p>
+       <p>${haber.ucuncuParagraf}</p>
+       <button class="expandButton">+</button>
+       </div> `}
+const articles=document.querySelector(".articles")
+data.forEach((i)=>{articles.innerHTML+=haberYapici(i)})
+*/
+  function haberYapici(haber) {
+  const DivHabeler=document.createElement("div");
+  DivHabeler.classList.add("article");
+
+  const elementH2=document.createElement("h2");
+  elementH2.textContent=haber.baslik;
+  DivHabeler.append(elementH2);
+
+  const elementP=document.createElement("p");
+  elementP.classList.add("tarih")
+  elementP.textContent=haber.tarih;
+  DivHabeler.append(elementP);
+
+
+const paragraphs=[haber.ilkParagraf,haber.ikinciParagraf,haber.ucuncuParagraf];
+  for (let i=0;i<paragraphs.length;i++)
+  {const  articlesP=document.createElement("p");
+    articlesP.textContent=paragraphs[i];
+    DivHabeler.append(articlesP);
+  }
+
+const exButton=document.createElement("button");
+exButton.classList.add("expandButton");
+exButton.textContent="+";
+exButton.addEventListener("click",()=>{DivHabeler.classList.toggle("article-open")});
+DivHabeler.append(exButton);
+return DivHabeler;
+}
+const haberContainer=document.querySelector(".articles");
+data.forEach((haber)=>{
+  
+  haberContainer.append(haberYapici(haber));
+
+})
+
+
+
+
+
+// function haberYapici(haber) {
+//   return `<div class="article">
+//       <h2>${haber.baslik}</h2>
+//       <p class="tarih">${haber.tarih}</p>
+
+//       <p>${haber.ilkParagraf}</p>
+//       <p>${haber.ikinciParagraf}</p>
+//       <p>${haber.ucuncuParagraf}</p>
+
+//       <button class="expandButton">+</button>
+//   </div>`;
+// }
+
+// const articles = document.querySelector(".articles");
+// addHaber();
+// data.forEach((i) => {
+//   articles.innerHTML += haberYapici(i);
+// }
+// );
+
+
